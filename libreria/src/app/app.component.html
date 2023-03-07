@@ -1,0 +1,23 @@
+
+
+<div *ngIf="connected==true">
+  <app-encabezado></app-encabezado>
+  <nav id="menu">
+    <ul>
+      <li><a [routerLink]="['/inicio']">INICIO</a></li>
+      <li><a [routerLink]="['/cuentas']">CUENTAS</a></li>
+      <li><a [routerLink]="['/crear-cuenta']">CREAR CUENTA</a></li>  
+    </ul>
+    
+    <div id="user">
+      <span>Bienvenido, </span><a [routerLink]="['/login']">{{user}}</a>
+    </div>
+  </nav>
+  <section id="content">
+    <router-outlet></router-outlet>
+  </section>  
+  <app-pie></app-pie>
+</div>
+<div *ngIf="connected==false">
+  <app-login></app-login>
+</div>

@@ -1,0 +1,42 @@
+<div class="comentarioRapido">
+    <style>
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    </style>
+    
+    <h1>Aquí podrá crearse su cuenta</h1>
+    <p>Al tener una cuenta usted podrá realizar transacciones o depósitos a otras cuentas según usted lo requiera</p>
+    
+</div>
+
+<div *ngIf="connected==true" class="container">
+
+    <div class="messages" *ngIf="messages">
+        <div class="{{messages.status}}">{{messages.message}}</div>
+    </div>
+    <h2>{{titulo}}</h2>
+    <form #accountForm="ngForm" (ngSubmit)="guardarCuenta(accountForm)">
+        <p>
+            <label for="tipo">Tipo: </label>
+            <select name="tipo" #tipo="ngModel" [(ngModel)]="account.tipo">
+                <option value="Ahorros">Ahorros</option>
+                <option value="Corriente">Corriente</option>
+            </select>
+        </p>
+        <p>
+            <label for="account">Cuenta: </label>
+            <!-- <input type="text" name="cuenta" #cuenta="ngModel" [(ngModel)]="account.cuenta">-->
+        </p>
+        <input type="submit" value="Guardar" [disabled]="!accountForm.form.valid">
+    </form>
+</div>

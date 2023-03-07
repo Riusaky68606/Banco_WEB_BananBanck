@@ -1,0 +1,66 @@
+<div *ngIf="connected==false" class="container">
+    <div id="login-box" class="{{classLogin}}">
+    <h2>{{titulo}}</h2>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <p>
+            <span>Usuario: </span>
+            <input type="text" name="user" #user="ngModel" [(ngModel)]="us" required>
+            <span *ngIf="user.touched && !user.valid">
+                El usuario es obligatorio
+            </span>
+        </p>
+        <p>
+            <span>Contraseña: </span>
+            <input type="password" name="password" #password="ngModel" [(ngModel)]="pwd" required>
+            <span *ngIf="password.touched && !password.valid">
+                La contraseña es obligatoria
+            </span>
+        </p>        
+        <input type="submit" value="ACCEDER" [disabled]="!loginForm.form.valid" class="boton">
+    </form>
+    <div>
+        <span>No tienes una cuenta? </span>
+        <a (click)="activarRegistroUsuario()" href="#">Registrate</a>
+    </div>
+    </div>
+    <div id="registro-usuario-box" class="{{classUsuario}}">
+        <app-crear-usuario></app-crear-usuario>
+        <a (click)="activarRegistroUsuario()" href="#">Volver</a>
+    </div>
+    
+    <div *ngIf="messages" class="mensajes">
+        <div *ngIf="messages.status=='success'" class="success">
+            <div>
+                <p>{{messages.message}}</p>
+            </div>
+        </div>
+        <div *ngIf="messages.status=='failed'" class="failed">
+            <div>
+                <p>{{messages.message}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="connected==true && user!=''" class="container">
+    <h2>{{titulo}}</h2>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <h2>Bienvenido {{user}}</h2>
+        <div class="logout">
+            <a (click)="logout()">LOG OUT</a>
+        </div>
+    </form>
+    <div *ngIf="messages" class="mensajes">
+        <div *ngIf="messages.status=='success'" class="success">
+            <div>
+                <p>{{messages.message}}</p>
+            </div>
+        </div>
+        <div *ngIf="messages.status=='failed'" class="failed">
+            <div>
+                <p>{{messages.message}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+   
+    
